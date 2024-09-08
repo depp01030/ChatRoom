@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- Add your resources here -->
+        <!-- For example: -->
+        <!-- <file>images/icon.png</file> -->
+    </qresource>
+</RCC>

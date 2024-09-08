@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug/ChatRoom-Server_autogen",
+	"CMAKE_BINARY_DIR" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server",
+	"CMAKE_SOURCE_DIR" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "MinGW Makefiles",
+	"INCLUDE_DIR" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug/ChatRoom-Server_autogen/include",
+	"INPUTS" : [],
+	"LOCK_FILE" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug/CMakeFiles/ChatRoom-Server_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.7.2/mingw_64/./bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug/CMakeFiles/ChatRoom-Server_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/resources/resources.qrc",
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

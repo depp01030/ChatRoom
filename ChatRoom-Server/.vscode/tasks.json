@@ -1,0 +1,134 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Initialize Build Folders",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "if not exist build (mkdir build)"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Initialize Debug Folders",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "if not exist build\\debug (mkdir build\\debug)"
+            ],
+            "dependsOn": "Initialize Build Folders",
+            "problemMatcher": []
+        },
+        {
+            "label": "Initialize Release Folders",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "if not exist build\\release (mkdir build\\release)"
+            ],
+            "dependsOn": "Initialize Build Folders",
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake Configure Debug",
+            "type": "shell",
+            "command": "C:/Qt/Tools/CMake_64/bin/cmake.exe",
+            "args": [
+                "-G",
+                "MinGW Makefiles",
+                "-B",
+                "${workspaceFolder}/build/debug",
+                "-S",
+                "${workspaceFolder}",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_PREFIX_PATH=C:/Qt/6.7.2/mingw_64",
+                "-DCMAKE_C_COMPILER=C:/Qt/Tools/mingw1120_64/bin/gcc.exe",
+                "-DCMAKE_CXX_COMPILER=C:/Qt/Tools/mingw1120_64/bin/g++.exe"
+            ],
+            "dependsOn": "Initialize Debug Folders",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake Configure Release",
+            "type": "shell",
+            "command": "C:/Qt/Tools/CMake_64/bin/cmake.exe",
+            "args": [
+                "-G",
+                "MinGW Makefiles",
+                "-B",
+                "${workspaceFolder}/build/release",
+                "-S",
+                "${workspaceFolder}",
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_PREFIX_PATH=C:/Qt/6.7.2/mingw_64",
+                "-DCMAKE_C_COMPILER=C:/Qt/Tools/mingw1120_64/bin/gcc.exe",
+                "-DCMAKE_CXX_COMPILER=C:/Qt/Tools/mingw1120_64/bin/g++.exe"
+            ],
+            "dependsOn": "Initialize Release Folders",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Debug",
+            "type": "shell",
+            "command": "C:/Qt/Tools/CMake_64/bin/cmake.exe",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build/debug"
+            ],
+            "dependsOn": "CMake Configure Debug",
+            "group": "build"
+        },
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "C:/Qt/Tools/CMake_64/bin/cmake.exe",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build/release"
+            ],
+            "dependsOn": "CMake Configure Release",
+            "group": "build"
+        },
+        {
+            "label": "Run Debug",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/debug/bin/${input:projectName}.exe",
+            "dependsOn": "Build Debug",
+            "group": "test"
+        },
+        {
+            "label": "Run Release",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/release/bin/${input:projectName}.exe",
+            "dependsOn": "Build Release",
+            "group": "test"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "buildType",
+            "type": "pickString",
+            "options": [
+                "Debug",
+                "Release"
+            ],
+            "default": "Debug",
+            "description": "The build type (Debug or Release)"
+        },
+        {
+            "id": "projectName",
+            "type": "command",
+            "command": "cmake.getExecutableName",
+            "args": [
+                "${workspaceFolder}",
+                "${input:buildType}"
+            ], 
+        }
+    ]
+}
