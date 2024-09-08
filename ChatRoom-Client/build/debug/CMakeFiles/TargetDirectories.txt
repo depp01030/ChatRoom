@@ -1,5 +1,0 @@
-D:/CLearning/VSC/ChatRoom/ChatRoom-Client/build/debug/CMakeFiles/ChatRoom-Client.dir
-D:/CLearning/VSC/ChatRoom/ChatRoom-Client/build/debug/CMakeFiles/edit_cache.dir
-D:/CLearning/VSC/ChatRoom/ChatRoom-Client/build/debug/CMakeFiles/rebuild_cache.dir
-D:/CLearning/VSC/ChatRoom/ChatRoom-Client/build/debug/CMakeFiles/ChatRoom-Client_autogen_timestamp_deps.dir
-D:/CLearning/VSC/ChatRoom/ChatRoom-Client/build/debug/CMakeFiles/ChatRoom-Client_autogen.dir
