@@ -689,7 +689,7 @@ D:/CLearning/VSC/ChatRoom/ChatRoom-Server/include/server_utils.h
  mdp:C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/CLearning/VSC/ChatRoom/ChatRoom-Server/build/debug/ChatRoom-Server_autogen/moc_predefs.h
  mdp:D:/CLearning/VSC/ChatRoom/ChatRoom-Server/include/server_utils.h
-D:/CLearning/VSC/ChatRoom/ChatRoom-Server/src/main.cpp
+D:/CLearning/VSC/ChatRoom/ChatRoom-Server/src/server_utils.cpp
 D:/CLearning/VSC/ChatRoom/ChatRoom-Server/src/mainwindow.cpp
  uic:ui_mainwindow.h
-D:/CLearning/VSC/ChatRoom/ChatRoom-Server/src/server_utils.cpp
+D:/CLearning/VSC/ChatRoom/ChatRoom-Server/src/main.cpp

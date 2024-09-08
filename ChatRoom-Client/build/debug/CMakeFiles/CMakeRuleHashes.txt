@@ -1,4 +1,4 @@
 # Hashes of file build rules.
-f904c3dcdc4b1c280273c6e42e499206 CMakeFiles/ChatRoom-Server_autogen
-a452e579b2e499f683a41f8275423c37 ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp
-437e5e86e525c02471b5429cf5f32ddb ChatRoom-Server_autogen/timestamp
+7efa72014d283bf58ad94d4572b4ba27 CMakeFiles/ChatRoom-Client_autogen
+845a8e66972f690fbf211b424207b177 ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp
+d08aa86a4235514bd1fb4848786f0f4b ChatRoom-Client_autogen/timestamp

@@ -1,14 +1,14 @@
 #include "../include/mainwindow.h"
-#include "../include/server_utils.h"
+#include "client_utils.h"  // Updated include
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_server(new ServerUtils)
+    , m_client(new ClientUtils)  // Updated to ClientUtils
 {
-    ui->setupUi(this);
-    connect(m_server, &ServerUtils::messageSent, this, &MainWindow::updateChatBox);
+    ui->setupUi(this); 
+    connect(m_client, &ClientUtils::messageReceived, this, &MainWindow::updateChatBox);
     setupClickedEvent();
 }
 
@@ -28,7 +28,7 @@ void MainWindow::onButtonClicked()
 {   
     QString message = ui->textEdit_message->toPlainText();
     ui->textEdit_message->clear();
-    m_server->sendMessage(message);
+    m_client->sendMessage(message);
 
 }
 void MainWindow::updateChatBox(const QString &message){

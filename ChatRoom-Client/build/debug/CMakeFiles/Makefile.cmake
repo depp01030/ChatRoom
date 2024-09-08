@@ -199,11 +199,11 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/Windows-windres.cmake"
   "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/Windows.cmake"
   "C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/WindowsPaths.cmake"
-  "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/CMakeLists.txt"
+  "D:/CLearning/VSC/ChatRoom/ChatRoom-Client/CMakeLists.txt"
   "CMakeFiles/3.29.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.29.3/CMakeRCCompiler.cmake"
   "CMakeFiles/3.29.3/CMakeSystem.cmake"
-  "D:/CLearning/VSC/ChatRoom/ChatRoom-Server/resources/resources.qrc"
+  "D:/CLearning/VSC/ChatRoom/ChatRoom-Client/resources/resources.qrc"
   )
 
 # The corresponding makefile is:
@@ -214,8 +214,8 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/ChatRoom-Server_autogen.dir/AutogenInfo.json"
-  "CMakeFiles/ChatRoom-Server_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Info.json"
+  "CMakeFiles/ChatRoom-Client_autogen.dir/AutogenInfo.json"
+  "CMakeFiles/ChatRoom-Client_autogen.dir/AutoRcc_resources_3YJK5W5UP7_Info.json"
   ".qt/QtDeploySupport.cmake"
   ".qt/QtDeployTargets.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
@@ -223,7 +223,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/ChatRoom-Server.dir/DependInfo.cmake"
-  "CMakeFiles/ChatRoom-Server_autogen_timestamp_deps.dir/DependInfo.cmake"
-  "CMakeFiles/ChatRoom-Server_autogen.dir/DependInfo.cmake"
+  "CMakeFiles/ChatRoom-Client.dir/DependInfo.cmake"
+  "CMakeFiles/ChatRoom-Client_autogen_timestamp_deps.dir/DependInfo.cmake"
+  "CMakeFiles/ChatRoom-Client_autogen.dir/DependInfo.cmake"
   )

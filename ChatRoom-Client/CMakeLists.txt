@@ -20,8 +20,8 @@ add_executable(${PROJECT_NAME}
 src/main.cpp
 src/mainwindow.cpp
 include/mainwindow.h
-src/server_utils.cpp
-include/server_utils.h 
+src/client_utils.cpp
+include/client_utils.h 
 src/mainwindow.ui
 resources/resources.qrc
 )

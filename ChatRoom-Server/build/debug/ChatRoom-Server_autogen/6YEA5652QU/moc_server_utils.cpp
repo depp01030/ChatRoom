@@ -36,11 +36,11 @@ namespace {
 struct qt_meta_stringdata_CLASSServerUtilsENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSServerUtilsENDCLASS = QtMocHelpers::stringData(
     "ServerUtils",
-    "messageSent",
+    "messageReceived",
     "",
     "message",
     "onNewConnection",
-    "onReadyRead"
+    "slot_messageReceived"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -64,8 +64,8 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSServerUtilsENDCLASS[] = {
        1,    1,   32,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       4,    0,   35,    2, 0x0a,    3 /* Public */,
-       5,    0,   36,    2, 0x0a,    4 /* Public */,
+       4,    0,   35,    2, 0x08,    3 /* Private */,
+       5,    0,   36,    2, 0x08,    4 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -86,12 +86,12 @@ Q_CONSTINIT const QMetaObject ServerUtils::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSServerUtilsENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<ServerUtils, std::true_type>,
-        // method 'messageSent'
+        // method 'messageReceived'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'onNewConnection'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'onReadyRead'
+        // method 'slot_messageReceived'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -103,16 +103,16 @@ void ServerUtils::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<ServerUtils *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->messageSent((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 0: _t->messageReceived((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: _t->onNewConnection(); break;
-        case 2: _t->onReadyRead(); break;
+        case 2: _t->slot_messageReceived(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _t = void (ServerUtils::*)(const QString & );
-            if (_t _q_method = &ServerUtils::messageSent; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+            if (_t _q_method = &ServerUtils::messageReceived; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
@@ -151,7 +151,7 @@ int ServerUtils::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ServerUtils::messageSent(const QString & _t1)
+void ServerUtils::messageReceived(const QString & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

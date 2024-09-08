@@ -56,10 +56,10 @@ RM = C:\Qt\Tools\CMake_64\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\CLearning\VSC\ChatRoom\ChatRoom-Server
+CMAKE_SOURCE_DIR = D:\CLearning\VSC\ChatRoom\ChatRoom-Client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\CLearning\VSC\ChatRoom\ChatRoom-Server\build\debug
+CMAKE_BINARY_DIR = D:\CLearning\VSC\ChatRoom\ChatRoom-Client\build\debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\CLearning\VSC\ChatRoom\ChatRoom-Server\build\debug\CMakeFiles D:\CLearning\VSC\ChatRoom\ChatRoom-Server\build\debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\CLearning\VSC\ChatRoom\ChatRoom-Client\build\debug\CMakeFiles D:\CLearning\VSC\ChatRoom\ChatRoom-Client\build\debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\CLearning\VSC\ChatRoom\ChatRoom-Server\build\debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\CLearning\VSC\ChatRoom\ChatRoom-Client\build\debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -116,98 +116,122 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ChatRoom-Server
+# Target rules for targets named ChatRoom-Client
 
 # Build rule for target.
-ChatRoom-Server: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ChatRoom-Server
-.PHONY : ChatRoom-Server
+ChatRoom-Client: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ChatRoom-Client
+.PHONY : ChatRoom-Client
 
 # fast build rule for target.
-ChatRoom-Server/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/build
-.PHONY : ChatRoom-Server/fast
+ChatRoom-Client/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/build
+.PHONY : ChatRoom-Client/fast
 
 #=============================================================================
-# Target rules for targets named ChatRoom-Server_autogen_timestamp_deps
+# Target rules for targets named ChatRoom-Client_autogen_timestamp_deps
 
 # Build rule for target.
-ChatRoom-Server_autogen_timestamp_deps: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ChatRoom-Server_autogen_timestamp_deps
-.PHONY : ChatRoom-Server_autogen_timestamp_deps
+ChatRoom-Client_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ChatRoom-Client_autogen_timestamp_deps
+.PHONY : ChatRoom-Client_autogen_timestamp_deps
 
 # fast build rule for target.
-ChatRoom-Server_autogen_timestamp_deps/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server_autogen_timestamp_deps.dir\build.make CMakeFiles/ChatRoom-Server_autogen_timestamp_deps.dir/build
-.PHONY : ChatRoom-Server_autogen_timestamp_deps/fast
+ChatRoom-Client_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client_autogen_timestamp_deps.dir\build.make CMakeFiles/ChatRoom-Client_autogen_timestamp_deps.dir/build
+.PHONY : ChatRoom-Client_autogen_timestamp_deps/fast
 
 #=============================================================================
-# Target rules for targets named ChatRoom-Server_autogen
+# Target rules for targets named ChatRoom-Client_autogen
 
 # Build rule for target.
-ChatRoom-Server_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ChatRoom-Server_autogen
-.PHONY : ChatRoom-Server_autogen
+ChatRoom-Client_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 ChatRoom-Client_autogen
+.PHONY : ChatRoom-Client_autogen
 
 # fast build rule for target.
-ChatRoom-Server_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server_autogen.dir\build.make CMakeFiles/ChatRoom-Server_autogen.dir/build
-.PHONY : ChatRoom-Server_autogen/fast
+ChatRoom-Client_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client_autogen.dir\build.make CMakeFiles/ChatRoom-Client_autogen.dir/build
+.PHONY : ChatRoom-Client_autogen/fast
 
-ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.obj: ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.obj
-.PHONY : ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.obj
-
-# target to build an object file
-ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.obj
-.PHONY : ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.obj
-
-ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.i: ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.i
-.PHONY : ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.i
-
-# target to preprocess a source file
-ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.i
-.PHONY : ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.i
-
-ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.s: ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.s
-.PHONY : ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.s
-
-# target to generate assembly for a file
-ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.s
-.PHONY : ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.cpp.s
-
-ChatRoom-Server_autogen/mocs_compilation.obj: ChatRoom-Server_autogen/mocs_compilation.cpp.obj
-.PHONY : ChatRoom-Server_autogen/mocs_compilation.obj
+ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.obj: ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.obj
+.PHONY : ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.obj
 
 # target to build an object file
-ChatRoom-Server_autogen/mocs_compilation.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/ChatRoom-Server_autogen/mocs_compilation.cpp.obj
-.PHONY : ChatRoom-Server_autogen/mocs_compilation.cpp.obj
+ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.obj
+.PHONY : ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.obj
 
-ChatRoom-Server_autogen/mocs_compilation.i: ChatRoom-Server_autogen/mocs_compilation.cpp.i
-.PHONY : ChatRoom-Server_autogen/mocs_compilation.i
+ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.i: ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.i
+.PHONY : ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.i
 
 # target to preprocess a source file
-ChatRoom-Server_autogen/mocs_compilation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/ChatRoom-Server_autogen/mocs_compilation.cpp.i
-.PHONY : ChatRoom-Server_autogen/mocs_compilation.cpp.i
+ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.i
+.PHONY : ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.i
 
-ChatRoom-Server_autogen/mocs_compilation.s: ChatRoom-Server_autogen/mocs_compilation.cpp.s
-.PHONY : ChatRoom-Server_autogen/mocs_compilation.s
+ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.s: ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.s
+.PHONY : ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.s
 
 # target to generate assembly for a file
-ChatRoom-Server_autogen/mocs_compilation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/ChatRoom-Server_autogen/mocs_compilation.cpp.s
-.PHONY : ChatRoom-Server_autogen/mocs_compilation.cpp.s
+ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.s
+.PHONY : ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.cpp.s
+
+ChatRoom-Client_autogen/mocs_compilation.obj: ChatRoom-Client_autogen/mocs_compilation.cpp.obj
+.PHONY : ChatRoom-Client_autogen/mocs_compilation.obj
+
+# target to build an object file
+ChatRoom-Client_autogen/mocs_compilation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/ChatRoom-Client_autogen/mocs_compilation.cpp.obj
+.PHONY : ChatRoom-Client_autogen/mocs_compilation.cpp.obj
+
+ChatRoom-Client_autogen/mocs_compilation.i: ChatRoom-Client_autogen/mocs_compilation.cpp.i
+.PHONY : ChatRoom-Client_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+ChatRoom-Client_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/ChatRoom-Client_autogen/mocs_compilation.cpp.i
+.PHONY : ChatRoom-Client_autogen/mocs_compilation.cpp.i
+
+ChatRoom-Client_autogen/mocs_compilation.s: ChatRoom-Client_autogen/mocs_compilation.cpp.s
+.PHONY : ChatRoom-Client_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+ChatRoom-Client_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/ChatRoom-Client_autogen/mocs_compilation.cpp.s
+.PHONY : ChatRoom-Client_autogen/mocs_compilation.cpp.s
+
+src/client_utils.obj: src/client_utils.cpp.obj
+.PHONY : src/client_utils.obj
+
+# target to build an object file
+src/client_utils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/client_utils.cpp.obj
+.PHONY : src/client_utils.cpp.obj
+
+src/client_utils.i: src/client_utils.cpp.i
+.PHONY : src/client_utils.i
+
+# target to preprocess a source file
+src/client_utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/client_utils.cpp.i
+.PHONY : src/client_utils.cpp.i
+
+src/client_utils.s: src/client_utils.cpp.s
+.PHONY : src/client_utils.s
+
+# target to generate assembly for a file
+src/client_utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/client_utils.cpp.s
+.PHONY : src/client_utils.cpp.s
 
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
 # target to build an object file
 src/main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/main.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/main.cpp.obj
 .PHONY : src/main.cpp.obj
 
 src/main.i: src/main.cpp.i
@@ -215,7 +239,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -223,7 +247,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/mainwindow.obj: src/mainwindow.cpp.obj
@@ -231,7 +255,7 @@ src/mainwindow.obj: src/mainwindow.cpp.obj
 
 # target to build an object file
 src/mainwindow.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/mainwindow.cpp.obj
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/mainwindow.cpp.obj
 .PHONY : src/mainwindow.cpp.obj
 
 src/mainwindow.i: src/mainwindow.cpp.i
@@ -239,7 +263,7 @@ src/mainwindow.i: src/mainwindow.cpp.i
 
 # target to preprocess a source file
 src/mainwindow.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/mainwindow.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/mainwindow.cpp.i
 .PHONY : src/mainwindow.cpp.i
 
 src/mainwindow.s: src/mainwindow.cpp.s
@@ -247,32 +271,8 @@ src/mainwindow.s: src/mainwindow.cpp.s
 
 # target to generate assembly for a file
 src/mainwindow.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/mainwindow.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Client.dir\build.make CMakeFiles/ChatRoom-Client.dir/src/mainwindow.cpp.s
 .PHONY : src/mainwindow.cpp.s
-
-src/server_utils.obj: src/server_utils.cpp.obj
-.PHONY : src/server_utils.obj
-
-# target to build an object file
-src/server_utils.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/server_utils.cpp.obj
-.PHONY : src/server_utils.cpp.obj
-
-src/server_utils.i: src/server_utils.cpp.i
-.PHONY : src/server_utils.i
-
-# target to preprocess a source file
-src/server_utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/server_utils.cpp.i
-.PHONY : src/server_utils.cpp.i
-
-src/server_utils.s: src/server_utils.cpp.s
-.PHONY : src/server_utils.s
-
-# target to generate assembly for a file
-src/server_utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/src/server_utils.cpp.s
-.PHONY : src/server_utils.cpp.s
 
 # Help Target
 help:
@@ -282,24 +282,24 @@ help:
 	@echo ... depend
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... ChatRoom-Server_autogen
-	@echo ... ChatRoom-Server_autogen_timestamp_deps
-	@echo ... ChatRoom-Server
-	@echo ... ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.obj
-	@echo ... ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.i
-	@echo ... ChatRoom-Server_autogen/3YJK5W5UP7/qrc_resources.s
-	@echo ... ChatRoom-Server_autogen/mocs_compilation.obj
-	@echo ... ChatRoom-Server_autogen/mocs_compilation.i
-	@echo ... ChatRoom-Server_autogen/mocs_compilation.s
+	@echo ... ChatRoom-Client_autogen
+	@echo ... ChatRoom-Client_autogen_timestamp_deps
+	@echo ... ChatRoom-Client
+	@echo ... ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.obj
+	@echo ... ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.i
+	@echo ... ChatRoom-Client_autogen/3YJK5W5UP7/qrc_resources.s
+	@echo ... ChatRoom-Client_autogen/mocs_compilation.obj
+	@echo ... ChatRoom-Client_autogen/mocs_compilation.i
+	@echo ... ChatRoom-Client_autogen/mocs_compilation.s
+	@echo ... src/client_utils.obj
+	@echo ... src/client_utils.i
+	@echo ... src/client_utils.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
 	@echo ... src/mainwindow.obj
 	@echo ... src/mainwindow.i
 	@echo ... src/mainwindow.s
-	@echo ... src/server_utils.obj
-	@echo ... src/server_utils.i
-	@echo ... src/server_utils.s
 .PHONY : help
 
 

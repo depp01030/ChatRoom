@@ -98,14 +98,14 @@
         {
             "label": "Run Debug",
             "type": "shell",
-            "command": "${workspaceFolder}/build/debug/bin/${input:projectName}.exe",
+            "command": "${workspaceFolder}/build/debug/bin/${workspaceFolderBasename}.exe",
             "dependsOn": "Build Debug",
             "group": "test"
         },
         {
             "label": "Run Release",
             "type": "shell",
-            "command": "${workspaceFolder}/build/release/bin/${input:projectName}.exe",
+            "command": "${workspaceFolder}/build/release/bin/${workspaceFolderBasename}.exe",
             "dependsOn": "Build Release",
             "group": "test"
         }
@@ -120,15 +120,6 @@
             ],
             "default": "Debug",
             "description": "The build type (Debug or Release)"
-        },
-        {
-            "id": "projectName",
-            "type": "command",
-            "command": "cmake.getExecutableName",
-            "args": [
-                "${workspaceFolder}",
-                "${input:buildType}"
-            ], 
-        }
+        }, 
     ]
 }

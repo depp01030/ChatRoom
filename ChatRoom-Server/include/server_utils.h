@@ -10,18 +10,21 @@ class ServerUtils : public QObject
     Q_OBJECT
 
 public:
-    QTcpSocket* m_socket;
-    QTcpServer* m_server;
-    ServerUtils(QObject *parent = nullptr);
-    void startServer();
+    explicit ServerUtils(QObject *parent = nullptr);
     void sendMessage(const QString& message);
-    
- public slots:
-    void onNewConnection();
-    void onReadyRead();
-signals:
-    void messageSent(const QString& message);
+    void startServer();
 
+signals:
+    void messageReceived(const QString& message);
+
+private slots:
+    void onNewConnection();
+    void slot_messageReceived();
+
+private:
+    QTcpServer* m_server;
+    QVector<QTcpSocket*> m_client_sockets;
+    void broadcastMessage(const QString& message);
 };
 
 #endif

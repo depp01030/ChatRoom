@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "client_utils.h"  // Updated include
 
-#include "../include/server_utils.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,7 +21,7 @@ private slots:
     
 private:
     Ui::MainWindow *ui;
-    ServerUtils *m_server;
+    ClientUtils* m_client;  // Changed from ServerUtils to ClientUtils
     void setupClickedEvent();
     void updateChatBox(const QString &message);
     

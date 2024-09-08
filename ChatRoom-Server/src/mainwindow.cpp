@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_server(new ServerUtils)
 {
     ui->setupUi(this);
-    connect(m_server, &ServerUtils::messageSent, this, &MainWindow::updateChatBox);
+    connect(m_server, &ServerUtils::messageReceived, this, &MainWindow::updateChatBox);
     setupClickedEvent();
 }
 

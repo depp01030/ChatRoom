@@ -79,8 +79,8 @@ clean: CMakeFiles/ChatRoom-Server_autogen.dir/clean
 # Target rules for target CMakeFiles/ChatRoom-Server.dir
 
 # All Build rule for target.
-CMakeFiles/ChatRoom-Server.dir/all: CMakeFiles/ChatRoom-Server_autogen_timestamp_deps.dir/all
 CMakeFiles/ChatRoom-Server.dir/all: CMakeFiles/ChatRoom-Server_autogen.dir/all
+CMakeFiles/ChatRoom-Server.dir/all: CMakeFiles/ChatRoom-Server_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ChatRoom-Server.dir\build.make CMakeFiles/ChatRoom-Server.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\CLearning\VSC\ChatRoom\ChatRoom-Server\build\debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target ChatRoom-Server"
