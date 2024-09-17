@@ -20,9 +20,14 @@ add_executable(${PROJECT_NAME}
 src/main.cpp
 src/mainwindow.cpp
 include/mainwindow.h
+src/mainwindow.ui
+
 src/client_utils.cpp
 include/client_utils.h 
-src/mainwindow.ui
+
+include/logindialog.h
+src/logindialog.cpp
+src/logindialog.ui   
 resources/resources.qrc
 )
 

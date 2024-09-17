@@ -36,3 +36,7 @@ qrc_*.cpp
 # 特定忽略
 ChatRoom-Server/build/*
 ChatRoom-Client/build/*
+!ChatRoom-Server/build/debug/bin*
+!ChatRoom-Server/build/release/bin*
+!ChatRoom-Client/build/release/bin*
+!ChatRoom-Client/build/debug/bin*

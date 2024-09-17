@@ -13,18 +13,19 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    bool get_login_status() const;
 
-private slots:
-    void onButtonClicked();
-    
+private slots: 
+    void onMessageReceived(const QString& message);
+
 private:
     Ui::MainWindow *ui;
-    ClientUtils* m_client;  // Changed from ServerUtils to ClientUtils
+    ClientUtils *m_client;
     void setupClickedEvent();
+    void onButtonClicked();
     void updateChatBox(const QString &message);
-    
 };
 
 #endif // MAINWINDOW_H

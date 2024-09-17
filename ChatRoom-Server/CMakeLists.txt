@@ -13,7 +13,9 @@ set(CMAKE_AUTOUIC ON)
 # Set Qt6 path
 set(CMAKE_PREFIX_PATH "C:/Qt/6.7.2/mingw_64")
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets Network)
+find_package(Qt6 REQUIRED COMPONENTS
+ Widgets Core Network HttpServer 
+ )
 
 # Use the variable for the executable name
 add_executable(${PROJECT_NAME}
@@ -26,7 +28,8 @@ src/mainwindow.ui
 resources/resources.qrc
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets Qt6::Network) 
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets
+ Qt6::Core Qt6::Network Qt6::HttpServer) 
 
 
 # Add include directories

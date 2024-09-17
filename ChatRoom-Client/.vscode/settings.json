@@ -3,6 +3,8 @@
         "iostream": "cpp",
         "qapplication": "cpp",
         "qtcpsocket": "cpp",
-        "qtcpserver": "cpp"
+        "qtcpserver": "cpp",
+        "qnetworkaccessmanager": "cpp",
+        "new": "cpp"
     }
 }
