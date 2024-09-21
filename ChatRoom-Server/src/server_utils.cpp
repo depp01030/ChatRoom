@@ -2,6 +2,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <Qstring>
+#include <QColor>
 ServerUtils::ServerUtils(QObject *parent) : QObject(parent),
     m_server(new QTcpServer(this)),
     m_httpServer(new QHttpServer(this)) { 
@@ -15,7 +16,7 @@ void ServerUtils::startServer(){
     if(m_server->isListening()){
         return;
     }
-    m_server->listen(QHostAddress::Any, 1234);
+    m_server->listen(QHostAddress("127.0.0.1"), 1234);
     connect(m_server, &QTcpServer::newConnection, this, &ServerUtils::slot_onNewConnection);
 }
 
@@ -25,7 +26,7 @@ void ServerUtils::startHttpServer(){
         return handleHttpRequest(request);
         
     });
-    m_httpServer->listen(QHostAddress::Any, 8080);
+    m_httpServer->listen(QHostAddress("127.0.0.1"), 8080);
 }
 QHttpServerResponse ServerUtils::handleHttpRequest(const QHttpServerRequest &request) {
  
@@ -64,15 +65,11 @@ QHttpServerResponse ServerUtils::handleHttpRequest(const QHttpServerRequest &req
 }
 
 bool ServerUtils::isLoginSuccess(const QString& username, const QString& password){
-        
     auto it = m_users.find(username);
     if (it != m_users.end() and it->second == password){
         return true;
-
     }
     return false;
-
-    
 }
 void ServerUtils::slot_onNewConnection() {
     QTcpSocket* client_socket = m_server->nextPendingConnection();
@@ -118,30 +115,25 @@ void ServerUtils::slot_messageReceived()
         return; 
     }
     QByteArray data = socket->readAll();
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-    
-    if (doc.isNull()) {
-        std::cout << "doc is null" << std::endl;
+    MessageData messageData(data);
+    if (!messageData.status){
         return;
     }
+
     
-    QJsonObject jsonObj = doc.object();
-    QString type = jsonObj["type"].toString();
-    if (isUserAuthenticated(socket)) {
-        std::cout << "isUserAuthenticated" << std::endl;
-        if (type == "message"){
-            QString message = jsonObj["content"].toString();
-            std::cout << "message: " << message.toStdString() << std::endl;
-            emit messageReceived(message);
-            broadcastMessage(message);
+    
+    if (isUserAuthenticated(socket)) { 
+        if (messageData.type == "message"){  
+            emit messageReceived(messageData);
+            broadcastMessage(messageData.toByteArray());
         }
     }
     else { 
-        std::cout << "isUserAuthenticated false" << std::endl;
-        QJsonObject response;
-        response["type"] = "error";
-        response["message"] = "You must login first";
-        socket->write(QJsonDocument(response).toJson());
+        std::cout << "User Not Login" << std::endl; 
+        MessageData messageData(
+            "error", "You must login first", "depp", "red"
+         );
+        socket->write(messageData.toByteArray());
     }
 }
 
@@ -149,30 +141,35 @@ void ServerUtils::slot_messageReceived()
 bool ServerUtils::isUserAuthenticated(QTcpSocket* socket) const {
     return m_authenticatedUsers.find(socket) != m_authenticatedUsers.end();
 }
-void ServerUtils::broadcastMessage(const QString& message)
+QByteArray ServerUtils::packMessage(const QString& type, const QString& message){
+    
+    MessageData messageData(type, message, "depp", "red");
+    QByteArray packedMessage = messageData.toByteArray();
+    return packedMessage;
+}
+void ServerUtils::broadcastMessage(const QByteArray& packedMessage)
 {
-    QJsonObject messageObj;
-    messageObj["type"] = "message";
-    messageObj["content"] = message;
-    
-    QJsonDocument doc(messageObj);
-    QByteArray jsonData = doc.toJson();
-
- 
-   
     for (auto &client: m_authenticatedUsers){
-        client.first->write(jsonData);
+        client.first->write(packedMessage);
     }
-    
     for (auto &client: m_unauthenticatedUsers){
-        client.first->write(jsonData);
+        client.first->write(packedMessage);
     }
 }
 
 
 
 void ServerUtils::sendMessage(const QString& message)
-{
-    emit messageReceived(message);
-    broadcastMessage(message);
+{    
+    // 生成隨機顏色
+    QColor randomColor(
+        QRandomGenerator::global()->bounded(256),  // 紅
+        QRandomGenerator::global()->bounded(256),  // 綠
+        QRandomGenerator::global()->bounded(256)   // 藍
+    );
+    
+    QString color = randomColor.name();
+    MessageData messageData("message", message, "Server", color);
+    emit messageReceived(messageData);
+    broadcastMessage(messageData.toByteArray());
 }

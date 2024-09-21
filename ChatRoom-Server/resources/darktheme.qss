@@ -1,0 +1,31 @@
+/* darktheme.qss */
+
+/* 設定背景顏色 */
+QWidget {
+    background-color: #2E2E2E; /* 深灰色背景 */
+    color: #FFFFFF; /* 白色文字 */
+}
+
+/* 按鈕樣式 */
+QPushButton {
+    background-color: #4A4A4A; /* 按鈕背景 */
+    color: #FFFFFF; /* 按鈕文字顏色 */
+    border: 1px solid #6A6A6A; /* 邊框顏色 */
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: #5A5A5A; /* 懸停時的背景顏色 */
+}
+
+/* 輸入框樣式 */
+QLineEdit {
+    background-color: #3E3E3E; /* 輸入框背景 */
+    color: #FFFFFF; /* 輸入框文字顏色 */
+    border: 1px solid #6A6A6A; /* 邊框顏色 */
+}
+
+/* 標題樣式 */
+QLabel {
+    color: #FFFFFF; /* 標題文字顏色 */
+}
