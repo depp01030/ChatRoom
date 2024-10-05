@@ -1,60 +1,124 @@
 cmake_minimum_required(VERSION 3.16)
-set(PROJECT_NAME "ChatRoom-Server")  # Define the project name variable
- 
+set(PROJECT_NAME "ChatRoom-Server")  # 定义项目名称
+message(STATUS "Configuring project: ${PROJECT_NAME}")
+
 project(${PROJECT_NAME} VERSION 1.0 LANGUAGES CXX)
 
+# C++ 标准
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+message(STATUS "Setting up Qt configurations")
+# 启用 Qt 自动处理功能
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
+# set(CMAKE_AUTOUIC ON)
 
-# Set Qt6 path
+# 设置 Qt6 路径
 set(CMAKE_PREFIX_PATH "C:/Qt/6.7.2/mingw_64")
+message(STATUS "Qt6 path set to: ${CMAKE_PREFIX_PATH}")
 
-find_package(Qt6 REQUIRED COMPONENTS
- Widgets Core Network HttpServer 
- )
+# 查找所需的 Qt6 组件
+find_package(Qt6 REQUIRED COMPONENTS Widgets Core Network HttpServer)
+message(STATUS "Qt6 components found")
 
-# Use the variable for the executable name
+# 添加源文件
+message(STATUS "Adding source files")
+
+
+
+set(MAINFILE 
+    main.cpp 
+)
+set(MAINWINDOW
+    modules/mainwindow/include/mainwindow.h
+    modules/mainwindow/src/mainwindow.cpp
+)
+
+set(CHAT_ROOM
+    modules/chatroom/include/chatroom.h
+    modules/chatroom/src/chatroom.cpp
+    modules/chatroom/include/chattextedit.h
+    modules/chatroom/src/chattextedit.cpp
+)
+set(GAME_SCREEN
+    modules/game_screen/include/game_screen.h
+    modules/game_screen/src/game_screen.cpp
+    modules/game_screen/include/code_card.h
+    modules/game_screen/src/code_card.cpp
+)
+set(GAME_CORE
+    modules/game_core/include/game_core.h
+    modules/game_core/src/game_core.cpp 
+    modules/game_core/include/candidate_words.h
+)
+set(SERVER_UTILS
+    modules/server_utils/include/server_utils.h
+    modules/server_utils/src/server_utils.cpp
+)
+# 添加 UI 文件
+set(UI_FILES
+    modules/mainwindow/ui/mainwindow.ui
+    modules/chatroom/ui/chatroom.ui
+    modules/game_screen/ui/game_screen.ui
+)
+set(RESOURCE_FILES
+    resources/resources.qrc
+)
+ 
+ 
+# 明确指定 UI 文件的处理
+qt6_wrap_ui(UI_HEADERS ${UI_FILES})
+
+message(STATUS "UI files: ${UI_FILES}")
+message(STATUS "Generated UI headers: ${UI_HEADERS}")
+
+# 创建可执行文件
 add_executable(${PROJECT_NAME}
-src/main.cpp
-src/mainwindow.cpp
-include/mainwindow.h
-
-src/chattextedit.cpp
-include/chattextedit.h 
-
-src/server_utils.cpp
-include/server_utils.h 
-src/mainwindow.ui
-resources/resources.qrc
+    ${MAINFILE}
+    ${MAINWINDOW}
+    ${CHAT_ROOM}
+    ${GAME_CORE}
+    ${GAME_SCREEN}
+    ${SERVER_UTILS}
+    ${UI_FILES}
+    ${RESOURCE_FILES} 
+    # ${UI_HEADERS}  # 确保包含生成的 UI 头文件
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Widgets
- Qt6::Core Qt6::Network Qt6::HttpServer) 
+target_link_libraries(${PROJECT_NAME} PRIVATE 
+    Qt6::Widgets 
+    Qt6::Network 
+    Qt6::HttpServer
+) 
 
-
-# Add include directories
+# 设置包含目录
 target_include_directories(${PROJECT_NAME} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mainwindow/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules/game_core/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules/game_screen/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules/chatroom/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules/server_utils/include
+    ${CMAKE_CURRENT_BINARY_DIR}  # 包含生成的 UI 头文件
 )
 
-# Set output directory for executables
+# 设置可执行文件的输出目录
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
-
-# Add different compile options based on Debug or Release mode
+# 确保 UI 头文件被正确生成
+# add_custom_target(generate_ui_headers DEPENDS ${UI_HEADERS})
+# add_dependencies(${PROJECT_NAME} generate_ui_headers)
+# 根据编译模式设置不同的编译选项
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_options(${PROJECT_NAME} PRIVATE "-g")  # Enable debugging symbols
+    target_compile_options(${PROJECT_NAME} PRIVATE "-g")  # 启用调试符号
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    target_compile_options(${PROJECT_NAME} PRIVATE "-O3") # Enable optimizations
+    target_compile_options(${PROJECT_NAME} PRIVATE "-O3") # 启用优化
 endif()
 
-# Copy Qt DLLs and platform plugin to output directory (for Windows)
+# 复制 Qt DLL 和平台插件到输出目录 (仅在 Windows 上)
 if(WIN32)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_PREFIX_PATH}/bin/windeployqt.exe
@@ -62,3 +126,5 @@ if(WIN32)
             $<TARGET_FILE_DIR:${PROJECT_NAME}>/$<TARGET_FILE_NAME:${PROJECT_NAME}>
     )
 endif()
+
+message(STATUS "CMake configuration completed")

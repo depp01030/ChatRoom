@@ -5,6 +5,10 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "C:/Qt/6.7.2/mingw_64/include/**", 
+                // "${workspaceFolder}/modules/chatroom/include/**",
+                // "${workspaceFolder}/modules/mainwindow/include/**",
+                // "${workspaceFolder}/modules/server_utils/include/**",
+                // "${workspaceFolder}/modules/game_screen/include",
             ],
             "defines": [
                 "_DEBUG",

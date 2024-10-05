@@ -1,12 +1,14 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CHATROOM_H
+#define CHATROOM_H
 
-#include <QMainWindow>
-#include "../include/server_utils.h"
-#include "../include/chattextedit.h"
+#include <QWidget>
+#include "chattextedit.h"
+#include "server_utils/include/server_utils.h"
 
+namespace Ui {
+    class ChatRoom;
+}
 
- 
 class ChatMessage : public QString {
 private:
     QString m_color = "grey";
@@ -24,29 +26,25 @@ public:
                   .arg(message)) {}
 };
 
-namespace Ui {
-class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class ChatRoom : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
+    explicit ChatRoom(QWidget *parent = nullptr, ServerUtils *server = nullptr);
+    explicit ChatRoom(QWidget *parent = nullptr);
+    ~ChatRoom();
+ 
 private slots:
-    void onButtonClicked();
+    void onSendButtonClicked();
     void updateChatBox(const QString &message);
     void updateChatBox(const MessageData &messageData);
-
 private:
-    Ui::MainWindow *ui;
+    Ui::ChatRoom *ui;
     ServerUtils *m_server;
-    void setupClickedEvent();
-    void loadTheme();
+    void setupConnection();
     void connectChatTextEdit();
+
 };
 
-#endif // MAINWINDOW_H
+#endif // CHATROOM_H

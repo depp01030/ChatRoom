@@ -1,14 +1,13 @@
-#include "../include/mainwindow.h"
+#include "modules/mainwindow/include/mainwindow.h"
+#include "modules/game_screen/include/game_screen.h"
 #include <iostream>
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    // GameScreen w ; 
     MainWindow w;
-    if (!w.get_login_status()){  // Check if login was unsuccessful
-        return -1;  // Exit with a non-zero status code
-    }
     w.show();
     return a.exec();
 }
