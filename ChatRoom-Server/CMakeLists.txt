@@ -55,6 +55,7 @@ set(GAME_CORE
 set(SERVER_UTILS
     modules/server_utils/include/server_utils.h
     modules/server_utils/src/server_utils.cpp
+    modules/server_utils/include/message_data.h
 )
 # 添加 UI 文件
 set(UI_FILES

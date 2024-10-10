@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "server_utils/include/client_utils.h"
+// #include "network_data_manager/include/network_data_manager.h"
 #include "ui_mainwindow.h"
 #include <QFile>
 #include <QTextStream>
@@ -7,11 +7,10 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_server(new ServerUtils)
-    , m_chatRoom(nullptr)  // 初始化为 nullptr 
+    , m_server(new NetworkDataManager)
 {
     
-    _setupUi();
+    setupUi();
     setupClickedEvent(); 
 }
 MainWindow::~MainWindow()
@@ -19,15 +18,19 @@ MainWindow::~MainWindow()
     delete ui;
     delete m_server;
     delete m_chatRoom;  
-    // delete m_gameScreen;   
+    delete m_gameScreen;   
 }
-void MainWindow::_setupUi()
+void MainWindow::setupUi()
 {
     
     ui->setupUi(this);
     // Apply dark theme
     loadTheme(); 
-    setupChatRoom();   
+    m_chatRoom = new ChatRoom(this, m_server);
+    setupWidgets(ui->chatRoomPlaceholder, m_chatRoom);
+    m_gameScreen = new GameScreen(this);
+    setupWidgets(ui->gameScreenPlaceholder, m_gameScreen);
+    // setupChatRoom();   
     // setupGameScreen();   
 
 }
@@ -38,6 +41,18 @@ void MainWindow::loadTheme()
         QTextStream stream(&file);
         this->setStyleSheet(stream.readAll());
     }
+}
+
+void MainWindow::setupWidgets(QWidget *placeholder, QWidget *widget){
+ 
+    // Create a layout for the placeholder
+    QVBoxLayout *layout = new QVBoxLayout(placeholder);
+    
+    // Add the ChatRoom to the layout
+    layout->addWidget(widget);
+    
+    // Set the layout to the placeholder
+    placeholder->setLayout(layout);
 }
 void MainWindow::setupChatRoom() 
 {
@@ -57,23 +72,23 @@ void MainWindow::setupChatRoom()
     placeholder->setLayout(layout);
 }
 
-// void MainWindow::setupGameScreen()
-// {
-//     // Create the GameScreen
-//     m_gameScreen = new GameScreen(this, m_server);
+void MainWindow::setupGameScreen()
+{
+    // Create the GameScreen
+    m_gameScreen = new GameScreen(this);
     
-//     // Find the placeholder widget in the UI
-//     QWidget *placeholder = ui->gameScreenPlaceholder;  
+    // Find the placeholder widget in the UI
+    QWidget *placeholder = ui->gameScreenPlaceholder;  
     
-//     // Create a layout for the placeholder
-//     QVBoxLayout *layout = new QVBoxLayout(placeholder);
+    // Create a layout for the placeholder
+    QVBoxLayout *layout = new QVBoxLayout(placeholder);
     
-//     // Add the m_gameScreen to the layout
-//     layout->addWidget(m_gameScreen);
+    // Add the m_gameScreen to the layout
+    layout->addWidget(m_gameScreen);
     
-//     // Set the layout to the placeholder
-//     placeholder->setLayout(layout);
-// }
+    // Set the layout to the placeholder
+    placeholder->setLayout(layout);
+}
 
 
 void MainWindow::setupClickedEvent()

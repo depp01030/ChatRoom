@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "server_utils/include/client_utils.h"
+#include "network_data_manager/include/network_data_manager.h"
 #include "chatroom/include/chatroom.h"
-// #include "game_screen/include/game_screen.h"
+#include "game_screen/include/game_screen.h"
 
  
 
@@ -23,14 +23,15 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    ServerUtils *m_server;
+    NetworkDataManager *m_server;
     ChatRoom *m_chatRoom;  
-    // GameScreen *m_gameScreen;
-    void _setupUi();
+    GameScreen *m_gameScreen;
+    void setupUi();
     void loadTheme();
     void setupClickedEvent();
+    void setupWidgets(QWidget *placeholder, QWidget *widget);
     void setupChatRoom();  
-    // void setupGameScreen();  
+    void setupGameScreen();  
 };
 
 #endif // MAINWINDOW_H

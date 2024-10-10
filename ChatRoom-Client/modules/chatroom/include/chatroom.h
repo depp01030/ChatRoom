@@ -3,7 +3,8 @@
 
 #include <QWidget>
 #include "chattextedit.h"
-#include "server_utils/include/server_utils.h"
+#include "network_data_manager/include/network_data_manager.h"
+#include "network_data_manager/include/message_data.h"
 
 namespace Ui {
     class ChatRoom;
@@ -31,19 +32,21 @@ class ChatRoom : public QWidget
     Q_OBJECT
 
 public:
-    explicit ChatRoom(QWidget *parent = nullptr, ServerUtils *server = nullptr);
+    explicit ChatRoom(QWidget *parent = nullptr, NetworkDataManager *server = nullptr);
     explicit ChatRoom(QWidget *parent = nullptr);
     ~ChatRoom();
  
 private slots:
     void onSendButtonClicked();
-    void updateChatBox(const QString &message);
-    void updateChatBox(const MessageData &messageData);
+    void onUpdateChatBox(const QString &message);
+    void onUpdateChatBox(const MessageData &messageData);
+signals:
+    void sendMessageToServer(const QString &message);
 private:
     Ui::ChatRoom *ui;
-    ServerUtils *m_server;
+    NetworkDataManager *m_server;
     void setupConnection();
-    void connectChatTextEdit();
+    // void connectChatTextEdit();
 
 };
 

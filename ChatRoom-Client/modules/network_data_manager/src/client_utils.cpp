@@ -1,8 +1,8 @@
 #include <iostream>
 #include <QJsonObject>
 #include <QJsonDocument>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
+// #include <QNetworkAccessManager>
+// #include <QNetworkRequest>
 #include <QNetworkReply>
 #include "../include/client_utils.h"
 #include <Qstring>

@@ -2,24 +2,24 @@
 #define CODE_CARD_H
 
 #include <QPushButton> 
-#include "game_core/include/game_core.h"
+#include "game_core/include/game_core.h" 
+#include "card_color.h"
 class CodeCard : public QPushButton {
     Q_OBJECT
 
 public: 
-    explicit CodeCard(CardInfo cardInfo, QWidget *parent = nullptr);
-    void setupConnections();
-
-
+    explicit CodeCard(int id, QString word, QWidget *parent = nullptr);
+    // void setupConnections();
+    int m_id;
+    QString m_word;
+    CardState m_state;
+    void showAnswer();
+    void setAnswerColor(const CardType cardType);
 private slots:
-    void onCardClicked();
+    // void onCardClicked();
 private: 
-    void initializeCard();
-    CardInfo m_cardInfo;
-    QColor m_normalColor = QColor("#A8A8A8");
-    QColor m_answerColor = QColor("#65C1A4");
-    QColor m_backgroundColor;
-    QColor m_markerColor;
+    void initializeCard(); 
+    QColor m_answerColor;
+    QColor m_backgroundColor = QColor(87, 83, 72);
 };
-
 #endif // CODE_CARD_H

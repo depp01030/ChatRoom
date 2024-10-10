@@ -14,7 +14,7 @@ public:
     ClientUtils(QObject *parent = nullptr);
     void connectToServer();
     bool login(const QString& username, const QString& password);
-    void sendMessage(const QString& message);
+    void postMessageToServer(const QString& message);
 
     bool m_isLoggedIn;
 
@@ -23,9 +23,11 @@ signals:
     void loginResult(bool success, const QString& message);
 
 private slots:
-    void slot_onConnected();
-    void slot_messageReceived();
-    void slot_onDisconnected();
+    void onConnected();
+    void onMessageReceivedFromLocal(const QString& message);
+    void onMessageReceived();
+    void onDisconnected();
+    
 
 private:
     QTcpSocket* m_socket;

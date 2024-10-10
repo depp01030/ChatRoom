@@ -1,6 +1,6 @@
 #include "chatroom.h"
 #include "ui_chatroom.h"
-ChatRoom::ChatRoom(QWidget *parent, ServerUtils *server)
+ChatRoom::ChatRoom(QWidget *parent, NetworkDataManager *server)
     : QWidget(parent)
     , ui(new Ui::ChatRoom)
     , m_server(server)
@@ -18,34 +18,29 @@ ChatRoom::~ChatRoom()
 void ChatRoom::setupConnection(){
     // Connect the button's clicked signal to the onButtonClicked slot
     connect(ui->pushButton_send, &QPushButton::clicked, this, &ChatRoom::onSendButtonClicked);
-    
-    connect(m_server, QOverload<const QString&>::of(&ServerUtils::messageReceived), 
-            this, QOverload<const QString&>::of(&ChatRoom::updateChatBox));
-    connect(m_server, QOverload<const MessageData&>::of(&ServerUtils::messageReceived), 
-            this, QOverload<const MessageData&>::of(&ChatRoom::updateChatBox));   
-    connectChatTextEdit();
+    connect(ui->textEdit_message, &ChatTextEdit::enterPressed, this, &ChatRoom::onSendButtonClicked);
+    connect(this, &ChatRoom::sendMessageToServer, m_server, &NetworkDataManager::postMessageToServer);
+
+    connect(m_server, QOverload<const QString&>::of(&NetworkDataManager::updateChatBox), 
+            this, QOverload<const QString&>::of(&ChatRoom::onUpdateChatBox));
+    // connect(m_server, QOverload<const MessageData&>::of(&NetworkDataManager::messageReceivedFromServer), 
+    //         this, QOverload<const MessageData&>::of(&ChatRoom::onUpdateChatBox));   
+ 
 }
-void ChatRoom::connectChatTextEdit()
-{
-    if (ui->textEdit_message) {
-        connect(ui->textEdit_message, &ChatTextEdit::enterPressed, this, &ChatRoom::onSendButtonClicked);
-    } else {
-        qDebug() << "textEdit_message not found";
-    }
-}
+ 
 void ChatRoom::onSendButtonClicked()
 {   
     QString message = ui->textEdit_message->toPlainText();
     ui->textEdit_message->clear();
-    m_server->sendMessage(message);
+    emit sendMessageToServer(message); 
 }
 
 
 
-void ChatRoom::updateChatBox(const QString &message){
+void ChatRoom::onUpdateChatBox(const QString &message){
     ui->textBrowser_chat_window->append(ChatMessage(message));
 }
-void ChatRoom::updateChatBox(const MessageData &messageData){
+void ChatRoom::onUpdateChatBox(const MessageData &messageData){
     ui->textBrowser_chat_window->append(ChatMessage(messageData));
 }
 

@@ -4,38 +4,41 @@
 
 
 
-CodeCard::CodeCard(CardInfo cardInfo, QWidget *parent)
-    : m_cardInfo(cardInfo),
-    QPushButton(parent), 
-    m_backgroundColor(m_normalColor)
+CodeCard::CodeCard(int id, QString word, QWidget *parent):
+    m_id(id), m_word(word),
+    QPushButton(parent) 
 {
-    setText(m_cardInfo.m_word);
+    setText(m_word); 
     setStyleSheet("background-color: " + m_backgroundColor.name() + "; color: white;");
     initializeCard();
-    setupConnections();
+    // setupConnections();
 }
-
+void CodeCard::setAnswerColor(const CardType cardType){
+    m_answerColor = getCardColor(cardType);
+}
 void CodeCard::initializeCard()
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    // 可以在這裡添加其他共同的初始化代碼
 }
-
-void CodeCard::setupConnections()
-{
-    connect(this, &CodeCard::clicked, this, &CodeCard::onCardClicked);
-}
-void CodeCard::onCardClicked()
-{
-    if (m_cardInfo.is_answer) {
-        setStyleSheet("background-color: " + m_answerColor.name() + "; color: white;");
-        qDebug() << text() + "is answer";
-    }
-    else {
-        qDebug() << text() + "is not answer";
-    }
+void CodeCard::showAnswer(){
+    setStyleSheet("background-color: " + m_answerColor.name() + "; color: white;");
     
 }
+// void CodeCard::setupConnections()
+// {
+//     connect(this, &CodeCard::clicked, this, &CodeCard::onCardClicked);
+// }
+// void CodeCard::onCardClicked()
+// {
+//     if (m_cardInfo.is_answer) {
+//         setStyleSheet("background-color: " + m_answerColor.name() + "; color: white;");
+//         qDebug() << text() + "is answer";
+//     }
+//     else {
+//         qDebug() << text() + "is not answer";
+//     }
+    
+// }
 
 // void CodeCard::paintEvent(QPaintEvent *event) {
 //     qDebug() << "CodeCard::paintEvent called for card with text:";

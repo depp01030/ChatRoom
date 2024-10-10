@@ -17,7 +17,7 @@ void ServerUtils::startServer(){
         return;
     }
     m_server->listen(QHostAddress("127.0.0.1"), 1234);
-    connect(m_server, &QTcpServer::newConnection, this, &ServerUtils::slot_onNewConnection);
+    connect(m_server, &QTcpServer::newConnection, this, &ServerUtils::onNewConnection);
 }
 
 void ServerUtils::startHttpServer(){
@@ -71,10 +71,10 @@ bool ServerUtils::isLoginSuccess(const QString& username, const QString& passwor
     }
     return false;
 }
-void ServerUtils::slot_onNewConnection() {
+void ServerUtils::onNewConnection() {
     QTcpSocket* client_socket = m_server->nextPendingConnection();
-    connect(client_socket, &QTcpSocket::readyRead, this, &ServerUtils::slot_messageReceived);
-    connect(client_socket, &QTcpSocket::disconnected, this, &ServerUtils::slot_handleDisconnection);
+    connect(client_socket, &QTcpSocket::readyRead, this, &ServerUtils::onMessageReceived);
+    connect(client_socket, &QTcpSocket::disconnected, this, &ServerUtils::onDisconnection);
 
     // 發送歡迎消息
     QJsonObject welcomeMsg;
@@ -92,7 +92,7 @@ void ServerUtils::slot_onNewConnection() {
 bool ServerUtils::isIPAuthenticated(const QString& ipAddress) const {
     return m_authenticatedIP.find(ipAddress) != m_authenticatedIP.end();
 }
-void ServerUtils::slot_handleDisconnection() {
+void ServerUtils::onDisconnection() {
     QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
     if (m_authenticatedUsers.find(socket) != m_authenticatedUsers.end()){
         m_authenticatedUsers.erase(socket);
@@ -106,7 +106,7 @@ void ServerUtils::slot_handleDisconnection() {
 
 }
 
-void ServerUtils::slot_messageReceived()
+void ServerUtils::onMessageReceived()
 {
     std::cout << "messageReceived" << std::endl;
     QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());

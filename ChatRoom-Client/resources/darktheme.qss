@@ -5,7 +5,6 @@ QWidget {
     background-color: #2E2E2E; /* 深灰色背景 */
     color: #FFFFFF; /* 白色文字 */
 }
-
 /* 按鈕樣式 */
 QPushButton {
     background-color: #4A4A4A; /* 按鈕背景 */

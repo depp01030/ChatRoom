@@ -11,9 +11,9 @@
 ClientUtils::ClientUtils(QObject *parent) : QObject(parent), m_isLoggedIn(false) {
     m_socket = new QTcpSocket(this);
     m_networkManager = new QNetworkAccessManager(this);
-    connect(m_socket, &QTcpSocket::connected, this, &ClientUtils::slot_onConnected);
-    connect(m_socket, &QTcpSocket::readyRead, this, &ClientUtils::slot_messageReceived);
-    connect(m_socket, &QTcpSocket::disconnected, this, &ClientUtils::slot_onDisconnected); 
+    connect(m_socket, &QTcpSocket::connected, this, &ClientUtils::onConnected);
+    connect(m_socket, &QTcpSocket::readyRead, this, &ClientUtils::onMessageReceived);
+    connect(m_socket, &QTcpSocket::disconnected, this, &ClientUtils::onDisconnected); 
     // Constructor implementation
 }
 
@@ -44,7 +44,7 @@ void ClientUtils::connectToServer() {
     m_socket->connectToHost("127.0.0.1", 1234);  
 }
 
-void ClientUtils::sendMessage(const QString& message) {
+void ClientUtils::onMessageReceivedFromUser(const QString& message) {
  
     QJsonObject messageData;
     messageData["type"] = "message";
@@ -56,12 +56,12 @@ void ClientUtils::sendMessage(const QString& message) {
 
 
 
-void ClientUtils::slot_onConnected() {
+void ClientUtils::onConnected() {
     // Handle new connection
     std::cout << "Connected to server" << std::endl;
 }
 
-void ClientUtils::slot_messageReceived() {
+void ClientUtils::onMessageReceived() {
     // Handle ready read
     QByteArray data = m_socket->readAll();
     QJsonDocument doc = QJsonDocument::fromJson(data);
@@ -75,6 +75,6 @@ void ClientUtils::slot_messageReceived() {
     }
 }
 
-void ClientUtils::slot_onDisconnected() {
+void ClientUtils::onDisconnected() {
     // Handle disconnected
 }
