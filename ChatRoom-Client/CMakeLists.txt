@@ -46,17 +46,22 @@ set(NETWORK_DATA_MANAGER
     modules/network_data_manager/src/network_data_manager.cpp
     modules/network_data_manager/include/message_data.h
 )
+
+set(GAME_CONTROLLER 
+    modules/game_controller/include/game_controller.h
+    modules/game_controller/src/game_controller.cpp
+)
 set(GAME_SCREEN
     modules/game_screen/include/game_screen.h
     modules/game_screen/src/game_screen.cpp
     modules/game_screen/include/code_card.h
     modules/game_screen/src/code_card.cpp
-    modules/game_screen/include/card_color.h
 )
 set(GAME_CORE
     modules/game_core/include/game_core.h
     modules/game_core/src/game_core.cpp 
     modules/game_core/include/candidate_words.h
+    modules/game_core/include/card_color.h
 )
 
 # 添加 UI 文件
@@ -85,6 +90,7 @@ add_executable(${PROJECT_NAME}
     ${RESOURCE_FILES} 
     ${GAME_CORE}
     ${GAME_SCREEN}
+    ${GAME_CONTROLLER}
     ${UI_FILES}
     # ${UI_HEADERS}  # 确保包含生成的 UI 头文件
 )
@@ -102,6 +108,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/modules/mainwindow/include
     ${CMAKE_CURRENT_SOURCE_DIR}/modules/game_core/include
     ${CMAKE_CURRENT_SOURCE_DIR}/modules/game_screen/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules/game_controller/include
     ${CMAKE_CURRENT_SOURCE_DIR}/modules/chatroom/include
     ${CMAKE_CURRENT_SOURCE_DIR}/modules/network_data_manager/include
     ${CMAKE_CURRENT_BINARY_DIR}  # 包含生成的 UI 头文件

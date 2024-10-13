@@ -18,7 +18,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete m_server;
     delete m_chatRoom;  
-    delete m_gameScreen;   
+    delete m_gameController;   
 }
 void MainWindow::setupUi()
 {
@@ -28,8 +28,10 @@ void MainWindow::setupUi()
     loadTheme(); 
     m_chatRoom = new ChatRoom(this, m_server);
     setupWidgets(ui->chatRoomPlaceholder, m_chatRoom);
-    m_gameScreen = new GameScreen(this);
-    setupWidgets(ui->gameScreenPlaceholder, m_gameScreen);
+    m_gameController = new GameController(this, m_server);
+    setupWidgets(ui->gameScreenPlaceholder,
+     m_gameController->m_gameScreen
+    );
     // setupChatRoom();   
     // setupGameScreen();   
 
@@ -50,41 +52,6 @@ void MainWindow::setupWidgets(QWidget *placeholder, QWidget *widget){
     
     // Add the ChatRoom to the layout
     layout->addWidget(widget);
-    
-    // Set the layout to the placeholder
-    placeholder->setLayout(layout);
-}
-void MainWindow::setupChatRoom() 
-{
-    // Create the ChatRoom
-    m_chatRoom = new ChatRoom(this, m_server);
-    
-    // Find the placeholder widget in the UI
-    QWidget *placeholder = ui->chatRoomPlaceholder;   
-
-    // Create a layout for the placeholder
-    QVBoxLayout *layout = new QVBoxLayout(placeholder);
-    
-    // Add the ChatRoom to the layout
-    layout->addWidget(m_chatRoom);
-    
-    // Set the layout to the placeholder
-    placeholder->setLayout(layout);
-}
-
-void MainWindow::setupGameScreen()
-{
-    // Create the GameScreen
-    m_gameScreen = new GameScreen(this);
-    
-    // Find the placeholder widget in the UI
-    QWidget *placeholder = ui->gameScreenPlaceholder;  
-    
-    // Create a layout for the placeholder
-    QVBoxLayout *layout = new QVBoxLayout(placeholder);
-    
-    // Add the m_gameScreen to the layout
-    layout->addWidget(m_gameScreen);
     
     // Set the layout to the placeholder
     placeholder->setLayout(layout);

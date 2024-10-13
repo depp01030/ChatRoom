@@ -1,20 +1,14 @@
 #ifndef GAME_CORE_H
 #define GAME_CORE_H
 #include "candidate_words.h"
+#include "card_color.h"
 #include <iostream>
 #include <vector>
 #include <QColor>
 #include <QObject>
 #include <QDebug>
 
-enum class CardType{
-    RedSpy,
-    BlueSpy,
-    GreenSpy,
-    People,
-    Mine,
 
-};
 enum class CardState{
     Open,
     Close,
@@ -28,6 +22,7 @@ public:
     size_t m_index;
     CardState m_state;
     CardType m_cardType;
+    QColor m_answerColor;
 private:
 };
 
@@ -37,29 +32,38 @@ class GameCore : public QObject {
 public:
     const int m_rowNum = 5;
     const int m_colNum = 5;
-    int m_redScore = 0;
-    int m_blueScore = 0;
     enum class Team { Blue, Red };
 
-    explicit GameCore(QObject *parent = nullptr);
+    GameCore(QObject *parent = nullptr);
     ~GameCore();
-    std::vector<CardInfo> randomGenerateCardInfos();
     void initGame();
-    void setCardInfos();
-    void onCodeCardClicked(const int id);
-    Team getCurrentTurn() const { return m_currentTurn; }
+    std::vector<CardInfo> getCardsInfo() const {
+         return m_cardsInfo; 
+        }
+    Team getCurrentTurn() const { return m_currentTurn; } 
+    int getTeamScore(Team team) const;
+    void openCard(CardInfo& cardInfo);
     void switchTurn();
     bool checkIsCardAnswer(const CardInfo& cardInfo) const;
+    void updateTeamScore(Team team, int score);
+    void setTeamScore(Team team, int score);
+    void addTeamScore(Team team, int score);
+private:
+    void setCardsInfo(); 
+    std::vector<CardInfo> randomGenerateCardInfos();
 signals:
     void updateGameInfo();
-    void showCardAnswer(const CardInfo& cardInfo);
-    void turnNextRound(Team team);
+    void cardOpened(const CardInfo& cardInfo);
+    void turnSwitched(Team team);
+    void teamScoreUpdated(Team team, int score);
 
 private:
-    friend class GameScreen;
-    void processPlayerCardSelection(CardInfo& cardInfo);
-    std::vector<CardInfo> m_cardInfos;
+    int m_redScore = 0;
+    int m_blueScore = 0;
+    friend class GameController; 
+    std::vector<CardInfo> m_cardsInfo;
     size_t m_totalCardNum = 25;
+    size_t m_answerCardNum = 9;
     Team m_currentTurn;
 };
 

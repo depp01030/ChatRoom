@@ -7,36 +7,35 @@
 #include <vector>
 #include <unordered_map>
 // #include "network_data_manager/include/network_data_manager.h"
-#include "game_core/include/game_core.h"
-#include "code_card.h"
-#include "card_color.h"
+#include "game_controller/include/game_controller.h" 
+#include "code_card.h" 
 
 
 namespace Ui {
     class GameScreen;
 } 
-
+class GameController; // 前向聲明
 class GameScreen : public QWidget {
     Q_OBJECT
 
 public: 
-    explicit GameScreen(QWidget *parent = nullptr);
+    explicit GameScreen(QWidget *parent = nullptr, GameController *gameController = nullptr);
     ~GameScreen();
 
 private: 
+    friend class GameController;
     std::unordered_map<int, CodeCard*> m_codeCards; //id, card
-    GameCore *m_gameCore;
+    GameController *m_gameController;
     Ui::GameScreen *ui;
     void setupUI();
-    void setupCodeCards();
-    void setupConnections();
-    void setRoundLabel(const GameCore::Team team);
+    void setupCodeCards(const std::vector<CardInfo>& cardsInfo);
+    void setCurrentTurn(const GameCore::Team team);
+    void setTeamScore(const GameCore::Team team, const int score);
+    void showCardAnswer(const CardInfo& cardInfo);
+    void setupConnections(); 
 private slots:
     
-    void onCodeCardClicked(const CodeCard* codeCard);
-    void onShowCardAnswer(const CardInfo& cardInfo);
-    void onTurnNextRound(const GameCore::Team team);
-    void onUpdateGameInfo();
+    void onCodeCardClicked(const CodeCard* codeCard); 
 };
 
 #endif // GAME_SCREEN_H

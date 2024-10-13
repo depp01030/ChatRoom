@@ -2,7 +2,15 @@
 #define CARD_COLOR_H
 
 #include <QColor>
-#include "game_core/include/game_core.h" 
+#include "game_core/include/game_core.h"   
+
+enum class CardType{
+    RedSpy,
+    BlueSpy,
+    GreenSpy,
+    People,
+    Mine, 
+};
 enum class CardColor{
     Normal,
     Answer,

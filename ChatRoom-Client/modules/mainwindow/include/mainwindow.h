@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "network_data_manager/include/network_data_manager.h"
 #include "chatroom/include/chatroom.h"
-#include "game_screen/include/game_screen.h"
+#include "game_controller/include/game_controller.h"
 
  
 
@@ -25,13 +25,12 @@ private:
     Ui::MainWindow *ui;
     NetworkDataManager *m_server;
     ChatRoom *m_chatRoom;  
-    GameScreen *m_gameScreen;
+    GameController *m_gameController;
     void setupUi();
     void loadTheme();
     void setupClickedEvent();
     void setupWidgets(QWidget *placeholder, QWidget *widget);
-    void setupChatRoom();  
-    void setupGameScreen();  
+ 
 };
 
 #endif // MAINWINDOW_H
