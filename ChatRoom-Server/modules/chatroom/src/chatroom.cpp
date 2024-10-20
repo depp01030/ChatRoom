@@ -1,9 +1,9 @@
 #include "chatroom.h"
 #include "ui_chatroom.h"
-ChatRoom::ChatRoom(QWidget *parent, ServerUtils *server)
+ChatRoom::ChatRoom(QWidget *parent, NetworkDataManager *networkDataManager)
     : QWidget(parent)
     , ui(new Ui::ChatRoom)
-    , m_server(server)
+    , m_networkDataManager(networkDataManager)
 {
     
     ui->setupUi(this);
@@ -13,40 +13,36 @@ ChatRoom::ChatRoom(QWidget *parent, ServerUtils *server)
 ChatRoom::~ChatRoom()
 {
     delete ui;
-    delete m_server;
 }
 void ChatRoom::setupConnection(){
     // Connect the button's clicked signal to the onButtonClicked slot
     connect(ui->pushButton_send, &QPushButton::clicked, this, &ChatRoom::onSendButtonClicked);
+    connect(ui->textEdit_message, &ChatTextEdit::enterPressed, this, &ChatRoom::onSendButtonClicked); 
     
-    connect(m_server, QOverload<const QString&>::of(&ServerUtils::messageReceived), 
-            this, QOverload<const QString&>::of(&ChatRoom::updateChatBox));
-    connect(m_server, QOverload<const MessageData&>::of(&ServerUtils::messageReceived), 
-            this, QOverload<const MessageData&>::of(&ChatRoom::updateChatBox));   
-    connectChatTextEdit();
+    connect(this, &ChatRoom::sendChatMessageToServer, m_networkDataManager, &NetworkDataManager::onSendingMessageToServer);
+    connect(m_networkDataManager, QOverload<const QString&>::of(&NetworkDataManager::updateChatBox), 
+            this, QOverload<const QString&>::of(&ChatRoom::onUpdateChatBox));
+    // connect(m_server, QOverload<const MessageData&>::of(&NetworkDataManager::messageReceivedFromServer), 
+    //         this, QOverload<const MessageData&>::of(&ChatRoom::onUpdateChatBox));   
+ 
 }
-void ChatRoom::connectChatTextEdit()
-{
-    if (ui->textEdit_message) {
-        connect(ui->textEdit_message, &ChatTextEdit::enterPressed, this, &ChatRoom::onSendButtonClicked);
-    } else {
-        qDebug() << "textEdit_message not found";
-    }
-}
+ 
 void ChatRoom::onSendButtonClicked()
 {   
-    QString message = ui->textEdit_message->toPlainText();
+    QJsonObject messageObject = {
+        {"type", static_cast<int>(MessageType::ChatMessage)},
+        {"message", ui->textEdit_message->toPlainText()}, 
+    }; 
+
+    emit sendChatMessageToServer(messageObject); 
     ui->textEdit_message->clear();
-    m_server->sendMessage(message);
+} 
+
+void ChatRoom::onUpdateChatBox(const QString &message){
+    ChatMessage chatMessage(message);
+    qDebug() << chatMessage.getFormattedMessage();
+    ui->textBrowser_chat_window->append(chatMessage.getFormattedMessage());
 }
 
-
-
-void ChatRoom::updateChatBox(const QString &message){
-    ui->textBrowser_chat_window->append(ChatMessage(message));
-}
-void ChatRoom::updateChatBox(const MessageData &messageData){
-    ui->textBrowser_chat_window->append(ChatMessage(messageData));
-}
 
 

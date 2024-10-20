@@ -1,5 +1,4 @@
-#include "modules/mainwindow/include/mainwindow.h"
-#include "modules/game_screen/include/game_screen.h"
+#include "modules/mainwindow/include/mainwindow.h" 
 #include <iostream>
 #include <QApplication>
 

@@ -1,29 +1,48 @@
 #include <iostream>
-#include <QJsonObject>
-#include <QJsonDocument>
 // #include <QNetworkAccessManager>
 // #include <QNetworkRequest>
 #include <QNetworkReply>
-#include "../include/network_data_manager.h"
 #include <Qstring>
-#include <QEventLoop>
+#include <QEventLoop> 
+#include "network_data_manager.h" 
 
-NetworkDataManager::NetworkDataManager(QObject *parent) : QObject(parent), m_isLoggedIn(false) {
-    m_socket = new QTcpSocket(this);
-    m_networkManager = new QNetworkAccessManager(this);
+NetworkDataManager::NetworkDataManager(QObject *parent)
+    : QObject(parent),
+      m_isLoggedIn(false),
+      m_socket(new QTcpSocket(this)),
+      m_messageProcesser(new MessageProcesser(this)),
+      m_networkManager(new QNetworkAccessManager(this)),
+      m_user(new User("A", m_socket->peerAddress().toString()))
+{
     connectToServer();
     connect(m_socket, &QTcpSocket::connected, this, &NetworkDataManager::onConnected);
-    connect(m_socket, &QTcpSocket::readyRead, this, &NetworkDataManager::onMessageReceivedFromServer);
+    connect(m_socket, &QTcpSocket::readyRead, this, &NetworkDataManager::onReceivingMessageFromServer);
     connect(m_socket, &QTcpSocket::disconnected, this, &NetworkDataManager::onDisconnected); 
     // Constructor implementation
+}
+NetworkDataManager::~NetworkDataManager()
+{
+    if (m_socket) {
+        m_socket->disconnectFromHost();
+        delete m_socket;
+    }
+    if (m_networkManager) {
+        delete m_networkManager;
+    }
 }
 void NetworkDataManager::onConnected() {
     // Handle new connection
     std::cout << "Connected to server" << std::endl;
+
 }
 void NetworkDataManager::connectToServer() {
     m_socket->connectToHost("127.0.0.1", 1234);  
 }
+
+void NetworkDataManager::onDisconnected() {
+    // Handle disconnected
+}
+
 // bool NetworkDataManager::login(const QString& username, const QString& password) {
 //     QJsonObject loginData;
 //     loginData["username"] = username;
@@ -47,39 +66,26 @@ void NetworkDataManager::connectToServer() {
 //     return m_isLoggedIn;
 // }
 
+void NetworkDataManager::onSendingMessageToServer(const QJsonObject& jsonObj) {
+    //qDebug() << "Received message from local: " << jsonObj;
+    qDebug() << "onSendingMessageToServer : " << jsonObj;
+    QJsonObject messageObj = m_messageProcesser->messageWrapper(jsonObj); 
 
+    // QString userID = messageObj["userID"].toString();
+    // QString chatMessage = userID + ": " + messageObj["content"]["message"].toString(); 
+    // emit updateChatBox(chatMessage);
 
-void NetworkDataManager::onMessageReceivedFromLocal(const QString& message) {
-    postMessageToServer(message);
+    QByteArray message = m_messageProcesser->messageObjToByteArray(messageObj);
+    sendMessageToServer(message);
 } 
-void NetworkDataManager::postMessageToServer(const QString& message) {
- 
-    QJsonObject messageData;
-    messageData["type"] = "message";
-    messageData["content"] = message;
-    QJsonDocument doc(messageData);
-
-    m_socket->write(doc.toJson());
-}
-
-
-
-
-
-void NetworkDataManager::onMessageReceivedFromServer() {
- 
+void NetworkDataManager::sendMessageToServer(const QByteArray& message) {
+    m_socket->write(message);
+} 
+void NetworkDataManager::onReceivingMessageFromServer( ) {
+    qDebug() << "onMessageReceivedFromServer";
     QByteArray data = m_socket->readAll();
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-    if (doc.isNull()){
-        return;
-    }
-    QJsonObject jsonObj = doc.object();
-    if (jsonObj["type"] == "message"){
-        QString message = jsonObj["content"].toString();
-        emit updateChatBox(message);
-    }
-}
-
-void NetworkDataManager::onDisconnected() {
-    // Handle disconnected
+    m_messageProcesser->processSocketMessage(data); 
+} 
+void NetworkDataManager::broadcastMessage(const QJsonObject& messageObject){
+    return;
 }

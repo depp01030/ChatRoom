@@ -28,12 +28,20 @@ private:
 
 class GameCore : public QObject {
     Q_OBJECT  // 添加這行
-
 public:
     const int m_rowNum = 5;
     const int m_colNum = 5;
     enum class Team { Blue, Red };
+private:
+    int m_redScore = 0;
+    int m_blueScore = 0;
+    friend class GameController; 
+    std::vector<CardInfo> m_cardsInfo;
+    size_t m_totalCardNum = 25;
+    size_t m_answerCardNum = 9;
+    Team m_currentTurn;
 
+public: 
     GameCore(QObject *parent = nullptr);
     ~GameCore();
     void initGame();
@@ -57,14 +65,7 @@ signals:
     void turnSwitched(Team team);
     void teamScoreUpdated(Team team, int score);
 
-private:
-    int m_redScore = 0;
-    int m_blueScore = 0;
-    friend class GameController; 
-    std::vector<CardInfo> m_cardsInfo;
-    size_t m_totalCardNum = 25;
-    size_t m_answerCardNum = 9;
-    Team m_currentTurn;
+
 };
 
 #endif // GAME_CORE_H

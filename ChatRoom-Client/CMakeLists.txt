@@ -44,7 +44,9 @@ set(CHAT_ROOM
 set(NETWORK_DATA_MANAGER
     modules/network_data_manager/include/network_data_manager.h
     modules/network_data_manager/src/network_data_manager.cpp
-    modules/network_data_manager/include/message_data.h
+    modules/network_data_manager/include/user.h
+    modules/network_data_manager/include/message_processer.h
+    modules/network_data_manager/src/message_processer.cpp
 )
 
 set(GAME_CONTROLLER 
@@ -92,7 +94,7 @@ add_executable(${PROJECT_NAME}
     ${GAME_SCREEN}
     ${GAME_CONTROLLER}
     ${UI_FILES}
-    # ${UI_HEADERS}  # 确保包含生成的 UI 头文件
+    ${UI_HEADERS}  # 确保包含生成的 UI 头文件
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 

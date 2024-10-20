@@ -115,26 +115,56 @@ void ServerUtils::onMessageReceived()
         return; 
     }
     QByteArray data = socket->readAll();
-    MessageData messageData(data);
-    if (!messageData.status){
-        return;
-    }
 
-    
-    
-    if (isUserAuthenticated(socket)) { 
-        if (messageData.type == "message"){  
-            emit messageReceived(messageData);
-            broadcastMessage(messageData.toByteArray());
+    QString jsonString(data);
+
+    QStringList jsonStrings = jsonString.split("\end");
+    qDebug() << jsonStrings;
+    for (const QString& str : jsonStrings) {
+        // 如果字串不是空的
+        if (!str.trimmed().isEmpty()) {
+            // 嘗試解析 JSON
+            QJsonDocument doc = QJsonDocument::fromJson(str.toUtf8());
+            if (!doc.isNull()) {
+                QJsonObject jsonObject = doc.object();
+                qDebug() << "Parsed JSON:" << jsonObject;
+                
+                // 在這裡處理解析後的 JSON 對象
+                // 例如，打印類型
+                qDebug() << "Type:" << jsonObject["type"].toInt();
+            }
         }
     }
-    else { 
-        std::cout << "User Not Login" << std::endl; 
-        MessageData messageData(
-            "error", "You must login first", "depp", "red"
-         );
-        socket->write(messageData.toByteArray());
-    }
+
+
+
+
+
+
+
+
+    // qDebug() << data;
+    // QJsonObject message = QJsonDocument::fromJson(data).object();
+    // // MessageData messageData(obj);
+    // // if (!messageData.status){
+    // //     return;
+    // // }
+    // qDebug() << message["type"].toString();
+    
+    
+    // if (isUserAuthenticated(socket)) { 
+    //     // if (messageData.type == "message"){  
+    //     //     emit messageReceived(messageData);
+    //     //     broadcastMessage(messageData.toByteArray());
+    //     // }
+    // }
+    // else { 
+    //     std::cout << "User Not Login" << std::endl; 
+    //     MessageData messageData(
+    //         "error", "You must login first", "depp", "red"
+    //      );
+    //     socket->write(messageData.toByteArray());
+    // }
 }
 
  

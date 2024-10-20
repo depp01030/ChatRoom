@@ -2,48 +2,51 @@
 #define CHATROOM_H
 
 #include <QWidget>
+#include <QColor>
 #include "chattextedit.h"
-#include "server_utils/include/server_utils.h"
-
+#include "network_data_manager/include/network_data_manager.h"
+#include "network_data_manager/include/message.h"
+// #include "network_data_manager/include/user.h"
 namespace Ui {
     class ChatRoom;
 }
 
-class ChatMessage : public QString {
+class ChatMessage {
 private:
-    QString m_color = "grey";
-public:
-    ChatMessage(const MessageData& data)
-        : QString(QString("<font color='%1'><b>%2</b>: %3</font>")
-                  .arg(data.color)
-                  .arg(data.user)
-                  .arg(data.content)) {}
-
+    QColor m_color = QColor(Qt::green);
+    QString m_formattedMessage;
+public: 
     ChatMessage(const QString& message)
-        : QString(QString("<font color='%1'><b>%2</b>: %3</font>")
-                  .arg(m_color)
-                  .arg("Server")
-                  .arg(message)) {}
+        :  m_formattedMessage(QString("<font color='%1'> : %2</font>")
+                             .arg(m_color.name()) 
+                             .arg(message)) {}
+
+    QString getFormattedMessage() const {
+        return m_formattedMessage;
+    }
 };
 
 class ChatRoom : public QWidget
 {
     Q_OBJECT
-
+private:
+    NetworkDataManager *m_networkDataManager;
 public:
-    explicit ChatRoom(QWidget *parent = nullptr, ServerUtils *server = nullptr);
+    explicit ChatRoom(QWidget *parent = nullptr,
+     NetworkDataManager *networkDataManager = nullptr);
     explicit ChatRoom(QWidget *parent = nullptr);
     ~ChatRoom();
  
 private slots:
     void onSendButtonClicked();
-    void updateChatBox(const QString &message);
-    void updateChatBox(const MessageData &messageData);
+    void onUpdateChatBox(const QString &message);
+signals:
+    void sendChatMessageToServer(const QJsonObject &message);
 private:
     Ui::ChatRoom *ui;
-    ServerUtils *m_server;
+    NetworkDataManager *m_server;
     void setupConnection();
-    void connectChatTextEdit();
+    // void connectChatTextEdit();
 
 };
 

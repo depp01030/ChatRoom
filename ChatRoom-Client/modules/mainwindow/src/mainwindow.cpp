@@ -7,7 +7,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_server(new NetworkDataManager)
+    , m_networkDataManager(new NetworkDataManager)
 {
     
     setupUi();
@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete m_server;
+    delete m_networkDataManager;
     delete m_chatRoom;  
     delete m_gameController;   
 }
@@ -26,14 +26,20 @@ void MainWindow::setupUi()
     ui->setupUi(this);
     // Apply dark theme
     loadTheme(); 
-    m_chatRoom = new ChatRoom(this, m_server);
-    setupWidgets(ui->chatRoomPlaceholder, m_chatRoom);
-    m_gameController = new GameController(this, m_server);
+    m_chatRoom = new ChatRoom(this, m_networkDataManager);
+    setupWidgets(ui->chatRoomPlaceholder,
+     m_chatRoom
+    );
+
+    m_gameController = new GameController(this, m_networkDataManager);
     setupWidgets(ui->gameScreenPlaceholder,
      m_gameController->m_gameScreen
     );
-    // setupChatRoom();   
-    // setupGameScreen();   
+
+}
+
+void MainWindow::setupClickedEvent()
+{
 
 }
 void MainWindow::loadTheme()
@@ -58,7 +64,3 @@ void MainWindow::setupWidgets(QWidget *placeholder, QWidget *widget){
 }
 
 
-void MainWindow::setupClickedEvent()
-{
-
-}

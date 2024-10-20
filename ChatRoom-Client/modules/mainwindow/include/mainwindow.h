@@ -23,7 +23,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    NetworkDataManager *m_server;
+    NetworkDataManager *m_networkDataManager;
     ChatRoom *m_chatRoom;  
     GameController *m_gameController;
     void setupUi();

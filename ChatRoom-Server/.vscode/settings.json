@@ -74,6 +74,16 @@
         "cerrno": "cpp",
         "cfloat": "cpp",
         "climits": "cpp",
-        "qkeyevent": "cpp"
+        "qkeyevent": "cpp",
+        "qhostaddress": "cpp",
+        "qobject": "cpp",
+        "forward_list": "cpp",
+        "buffer": "cpp",
+        "executor": "cpp",
+        "internet": "cpp",
+        "io_context": "cpp",
+        "netfwd": "cpp",
+        "socket": "cpp",
+        "timer": "cpp"
     }
 }

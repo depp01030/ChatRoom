@@ -50,7 +50,7 @@ std::vector<CardInfo> GameCore::randomGenerateCardInfos() {
 
 void GameCore::openCard(CardInfo& cardInfo) {
     if (cardInfo.m_state == CardState::Open) {
-        qDebug() << "Card already open";
+        qDebug() << "GameCore : Card already open";
         return;
     }
     cardInfo.m_state = CardState::Open;

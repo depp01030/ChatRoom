@@ -56,19 +56,17 @@ void GameScreen::setTeamScore(const GameCore::Team team, const int score) {
 
     
 }
-void GameScreen::setupConnections() {
-    // connect(m_gameController, &GameController::showCardAnswer, this, &GameScreen::onShowCardAnswer);
-    // connect(m_gameController, &GameController::turnNextRound, this, &GameScreen::onTurnNextRound);
-    // connect(m_gameController, &GameController::updateGameInfo, this, &GameScreen::onUpdateGameInfo);
+void GameScreen::setupConnections() { 
     // set up the connection between the card and the game screen
     for (auto &pair : m_codeCards){ 
+        disconnect(pair.second, &CodeCard::clicked, this, nullptr); // Disconnect any existing connections
         connect(pair.second, &CodeCard::clicked, this, [this, pair](){
             this->onCodeCardClicked(pair.second);
         }); 
     }
 }
 void GameScreen::onCodeCardClicked(const CodeCard* codeCard) {
-    qDebug() << "Card clicked:" << codeCard->m_word;
+    // qDebug() << "Card clicked:" << codeCard->m_word;
     m_gameController->onCodeCardClicked(codeCard->m_id);   
 
 }
@@ -80,7 +78,7 @@ void GameScreen::showCardAnswer(const CardInfo& cardInfo) {
     }
     CodeCard *card = m_codeCards[cardInfo.m_id];
     card->turnOpen(cardInfo.m_answerColor);
-    qDebug() << "Card answer:" << std::to_string(cardInfo.m_isAnswer);
+    // qDebug() << "Card answer:" << std::to_string(cardInfo.m_isAnswer);
 }
 
 
