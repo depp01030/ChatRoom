@@ -41,6 +41,29 @@ void NetworkDataManager::connectToServer() {
 
 void NetworkDataManager::onDisconnected() {
     // Handle disconnected
+}  
+void NetworkDataManager::onSendingMessageToServer(const QJsonObject& jsonObj) {
+    //qDebug() << "Received message from local: " << jsonObj;
+    qDebug() << "onSendingMessageToServer : " << jsonObj;
+    QJsonObject messageObj = m_messageProcesser->messageWrapper(jsonObj); 
+
+    // QString userID = messageObj["userID"].toString();
+    // QString chatMessage = userID + ": " + messageObj["content"]["message"].toString(); 
+    // emit updateChatBox(chatMessage);
+
+    QByteArray message = m_messageProcesser->messageObjToByteArray(messageObj);
+    sendMessageToServer(message);
+} 
+void NetworkDataManager::sendMessageToServer(const QByteArray& message) {
+    m_socket->write(message);
+} 
+void NetworkDataManager::onReceivingMessageFromServer( ) {
+    qDebug() << "onMessageReceivedFromServer";
+    QByteArray data = m_socket->readAll();
+    m_messageProcesser->processSocketMessage(data); 
+} 
+void NetworkDataManager::broadcastMessage(const QJsonObject& messageObject){
+    return;
 }
 
 // bool NetworkDataManager::login(const QString& username, const QString& password) {
@@ -65,27 +88,3 @@ void NetworkDataManager::onDisconnected() {
 //     std::cout << "Login result: " << m_isLoggedIn << std::endl;
 //     return m_isLoggedIn;
 // }
-
-void NetworkDataManager::onSendingMessageToServer(const QJsonObject& jsonObj) {
-    //qDebug() << "Received message from local: " << jsonObj;
-    qDebug() << "onSendingMessageToServer : " << jsonObj;
-    QJsonObject messageObj = m_messageProcesser->messageWrapper(jsonObj); 
-
-    // QString userID = messageObj["userID"].toString();
-    // QString chatMessage = userID + ": " + messageObj["content"]["message"].toString(); 
-    // emit updateChatBox(chatMessage);
-
-    QByteArray message = m_messageProcesser->messageObjToByteArray(messageObj);
-    sendMessageToServer(message);
-} 
-void NetworkDataManager::sendMessageToServer(const QByteArray& message) {
-    m_socket->write(message);
-} 
-void NetworkDataManager::onReceivingMessageFromServer( ) {
-    qDebug() << "onMessageReceivedFromServer";
-    QByteArray data = m_socket->readAll();
-    m_messageProcesser->processSocketMessage(data); 
-} 
-void NetworkDataManager::broadcastMessage(const QJsonObject& messageObject){
-    return;
-}
